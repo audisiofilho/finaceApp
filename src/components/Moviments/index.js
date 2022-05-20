@@ -1,20 +1,48 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
+import { MotiView, AnimatePresence, MotiText } from "moti";
+import { animate } from "framer-motion";
+
 export default function Moviments({ data }) {
-    const [showValue, setShowValue] = useState(false);
+  const [showValue, setShowValue] = useState(false);
   return (
-    <TouchableOpacity style={style.container} onPress={()=> setShowValue(!showValue)}>
+    <TouchableOpacity
+      style={style.container}
+      onPress={() => setShowValue(!showValue)}
+    >
       <Text style={style.date}>{data.date}</Text>
 
       <View style={style.content}>
-          <Text style={style.label}>{data.label}</Text>
+        <Text style={style.label}>{data.label}</Text>
         {showValue ? (
-            <Text style={data.type ? style.value : style.value2}>
+          <AnimatePresence exitBeforeEnter>
+            <MotiText style={data.type ? style.value : style.value2}
+              from={{
+                translateX: 100,
+              }}
+              animate={{
+                translateX: 0
+              }}
+              transition={{
+                type:'spring',
+                duration: 500
+              }}
+            >
               {data.type ? `R$ ${data.value}` : `R$ -${data.value}`}
-            </Text>
+            </MotiText>
+          </AnimatePresence>
         ) : (
-            <View style={style.skeleton}/>
+          <AnimatePresence exitBeforeEnter>
+            <MotiView style={style.skeleton}
+            from={{
+              opacity: 0
+              
+            }}
+            animate={{opacity:1}}
+            transition={{type:'timing'}}
+             ></MotiView>
+          </AnimatePresence>
         )}
       </View>
     </TouchableOpacity>
@@ -52,11 +80,11 @@ const style = StyleSheet.create({
     color: "#e74c3c",
     fontWeight: "bold",
   },
-  skeleton:{
-      width: 80,
-      height: 10,
-      backgroundColor: "#dadada",
-      marginTop: 6,
-      borderRadius:8
-  }
+  skeleton: {
+    width: 80,
+    height: 10,
+    backgroundColor: "#dadada",
+    marginTop: 6,
+    borderRadius: 8,
+  },
 });
