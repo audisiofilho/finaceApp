@@ -12,14 +12,14 @@ import { MotiView, MotiText } from "moti";
 import { Feather } from "@expo/vector-icons";
 
 const statusBarHeight = StatusBar.currentHeight
-  ? StatusBar.currentHeight + 22
+  ? StatusBar.currentHeight
   : 64;
 
-export default function Header({userName}) {
+export default function Header({ userName }) {
   return (
     <View style={styles.conatainer}>
-      <StatusBar backgroundColor="#ffd700" />
-      <MotiView 
+      <StatusBar backgroundColor="#046cb3" />
+      <MotiView
         style={styles.content}
         from={{
           translateY: -150,
@@ -30,24 +30,27 @@ export default function Header({userName}) {
           opacity: 1,
         }}
         transition={{
-          type:"timing",
-          duration:800,
-          delai:300
+          type: "timing",
+          duration: 800,
+          delai: 300,
         }}
-      > 
-        <MotiText style={styles.userName}
+      >
+        <MotiText
+          style={styles.userName}
           from={{
-            translateX: -300
+            translateX: -300,
           }}
           animate={{
-            translateX:0
+            translateX: 0,
           }}
           transition={{
-            type:"timing",
-            duration:800,
-            delay: 800
+            type: "timing",
+            duration: 800,
+            delay: 800,
           }}
-        >{userName}</MotiText>
+        >
+          {userName}
+        </MotiText>
         <TouchableOpacity activeOpacity={0.9} style={styles.buttonUser}>
           <Feather name="user" size={27} color="#fff" />
         </TouchableOpacity>
@@ -58,30 +61,30 @@ export default function Header({userName}) {
 
 const styles = StyleSheet.create({
   conatainer: {
-    backgroundColor: "#ffd700",
+    backgroundColor: "#046cb3",
     paddingTop: statusBarHeight,
     flexDirection: "row",
     paddingStart: 16,
-    paddingEnd:16,
-    paddingBottom: 44
+    paddingEnd: 16,
+    paddingBottom: 44,
   },
-  content:{
-      flex:1 ,
-      alignItems: "center",
-      flexDirection: "row",
-      justifyContent: "space-between"
+  content: {
+    flex: 1,
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
-  userName:{
-      fontSize: 18,
-      color: "#fff",
-      fontWeight: "bold"
+  userName: {
+    fontSize: 18,
+    color: "#fff",
+    fontWeight: "bold",
   },
-  buttonUser:{
-      width: 44,
-      height:44,
-      backgroundColor:'rgba(255,255,255,0.5)',
-      alignItems: "center",
-      justifyContent: "center",
-      borderRadius: 44 /2,
-  }
+  buttonUser: {
+    width: 44,
+    height: 44,
+    backgroundColor: "rgba(255,255,255,0.5)",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 44 / 2,
+  },
 });
